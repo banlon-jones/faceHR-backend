@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/facehr
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+
+
+secret-key: 6D4D6B6E305970394E594D51505750327979575164504d717161454135673664
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
