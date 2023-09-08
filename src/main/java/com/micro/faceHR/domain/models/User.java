@@ -64,9 +64,6 @@ public class User extends BaseEntity implements UserDetails {
     private MaritalStatus maritalStatus;
 
     @Column
-    private String StartDate;
-
-    @Column
     private ContractType contractType;
 
     @Column
@@ -75,7 +72,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column
     private String taxPayerNumber;
 
-    @OneToMany(mappedBy = "qualification")
+    @OneToMany(mappedBy = "user")
     private List<Qualification> qualifications;
 
     @ManyToOne
