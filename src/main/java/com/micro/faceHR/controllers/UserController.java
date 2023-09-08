@@ -1,32 +1,24 @@
 package com.micro.faceHR.controllers;
 
-import com.micro.faceHR.domain.services.AuthenticationService;
-import com.micro.faceHR.dto.AuthenticationResponse;
-import com.micro.faceHR.dto.LoginRequest;
-import com.micro.faceHR.dto.RegisterRequest;
+import com.micro.faceHR.domain.models.User;
+import com.micro.faceHR.domain.services.UserService;
+import com.micro.faceHR.dto.EmployeeInfo;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/public/user")
+@RequestMapping("/api/v1/protected/user")
 @RequiredArgsConstructor
 public class UserController {
 
-    private final AuthenticationService authenticationService;
+    private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody @Valid RegisterRequest registerRequest) {
-        return ResponseEntity.ok(authenticationService.register(registerRequest));
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> updateEmployee(@RequestBody @Valid EmployeeInfo employeeInfo, @PathVariable String userId) {
+        return ResponseEntity.ok(userService.updateEmployeeInfo(employeeInfo, UUID.fromString(userId)));
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> loginUser(@RequestBody @Valid LoginRequest loginRequest) {
-        return null;
-    }
-
 }

@@ -1,6 +1,6 @@
 package com.micro.faceHR.domain.models;
 
-import com.micro.faceHR.constants.Role;
+import com.micro.faceHR.constants.*;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +38,57 @@ public class User extends BaseEntity implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column
+    private Gender gender;
+
+    @Column
+    private Date startDate;
+
+    @Column
+    private Status status;
+
+    @Column
+    private String nationality;
+
+    @Column
+    private String jobTitle;
+
+    @Column
+    private String IDN;
+
+    @Column
+    private String dateOfBirth;
+
+    @Column
+    private MaritalStatus maritalStatus;
+
+    @Column
+    private String StartDate;
+
+    @Column
+    private ContractType contractType;
+
+    @Column
+    private String socialSecurityNumber;
+
+    @Column
+    private String taxPayerNumber;
+
+    @OneToMany(mappedBy = "qualification")
+    private List<Qualification> qualifications;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
